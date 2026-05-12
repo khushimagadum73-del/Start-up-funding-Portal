@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Startup Dashboard – InvestBridge</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="dashboard.css" />
+</head>
+<body class="dash-body">
+
+  <!-- ══ NEW PROPOSAL MODAL ══ -->
+  <div id="proposal-modal" class="modal-overlay" style="display:none">
+    <div class="modal-box">
+      <div class="modal-header">
+        <h3><i class="fas fa-file-alt"></i> New Proposal</h3>
+        <button class="modal-close" id="modal-close"><i class="fas fa-times"></i></button>
+      </div>
+      <div id="modal-error" class="api-error" style="display:none"></div>
+      <form id="proposal-form">
+        <div class="form-group">
+          <label>Proposal Title *</label>
+          <input type="text" id="p-title" placeholder="e.g. TechVision AI – Series A" required />
+        </div>
+        <div class="form-group">
+          <label>Description</label>
+          <textarea id="p-desc" rows="3" placeholder="Describe your startup and what you're building…"></textarea>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Industry</label>
+            <select id="p-industry">
+              <option value="">Select industry</option>
+              <option>SaaS</option><option>FinTech</option><option>HealthTech</option>
+              <option>CleanTech</option><option>AI/ML</option><option>EdTech</option>
+              <option>E-Commerce</option><option>Other</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Funding Stage</label>
+            <select id="p-stage">
+              <option value="">Select stage</option>
+              <option>Pre-Seed</option><option>Seed</option>
+              <option>Series A</option><option>Series B</option><option>Series C</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Funding Goal (USD)</label>
+          <input type="number" id="p-goal" placeholder="e.g. 500000" min="0" />
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-ghost" id="modal-cancel">Cancel</button>
+          <button type="submit" class="btn btn-primary" id="proposal-submit-btn">
+            <span class="btn-text"><i class="fas fa-plus"></i> Create Proposal</span>
+            <span class="btn-loader" style="display:none"><i class="fas fa-spinner fa-spin"></i> Saving…</span>
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ══ CONNECT MODAL ══ -->
+  <div id="connect-modal" class="modal-overlay" style="display:none">
+    <div class="modal-box" style="max-width:420px">
+      <div class="modal-header">
+        <h3><i class="fas fa-handshake"></i> Connect Request</h3>
+        <button class="modal-close" onclick="closeModal('connect-modal')"><i class="fas fa-times"></i></button>
+      </div>
+      <div style="padding:1.5rem;text-align:center">
+        <div id="connect-avatar" class="match-av" style="width:56px;height:56px;font-size:1.1rem;margin:0 auto 1rem"></div>
+        <h4 id="connect-name" style="margin-bottom:0.25rem"></h4>
+        <p id="connect-firm" style="color:var(--text3);font-size:0.85rem;margin-bottom:1.5rem"></p>
+        <p style="color:var(--text2);font-size:0.9rem;margin-bottom:1.5rem">A connection request will be sent to this investor. They'll be notified and can accept or decline.</p>
+        <div style="display:flex;gap:0.75rem;justify-content:center">
+          <button class="btn btn-ghost" onclick="closeModal('connect-modal')">Cancel</button>
+          <button class="btn btn-primary" onclick="confirmConnect()"><i class="fas fa-paper-plane"></i> Send Request</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ SCHEDULE MEETING MODAL ══ -->
+  <div id="schedule-modal" class="modal-overlay" style="display:none">
+    <div class="modal-box" style="max-width:500px">
+      <div class="modal-header">
+        <h3><i class="fas fa-calendar-plus"></i> Schedule Meeting</h3>
+        <button class="modal-close" onclick="closeModal('schedule-modal')"><i class="fas fa-times"></i></button>
+      </div>
+      <div id="schedule-error" class="api-error" style="display:none"></div>
+      <form id="schedule-form" style="padding:1.5rem;display:flex;flex-direction:column;gap:1rem">
+        <div class="form-group">
+          <label>Select Investor (accepted deals only) *</label>
+          <select id="s-investor-select" required>
+            <option value="">Loading accepted investors…</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Meeting Title *</label>
+          <input type="text" id="s-title" placeholder="e.g. Initial Pitch Call" required />
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Date *</label>
+            <input type="date" id="s-date" required />
+          </div>
+          <div class="form-group">
+            <label>Time *</label>
+            <input type="time" id="s-time" required />
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Meeting Type</label>
+          <select id="s-type">
+            <option>Video Call</option>
+            <option>Phone Call</option>
+            <option>In Person</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Agenda (optional)</label>
+          <textarea id="s-agenda" rows="2" placeholder="What will you discuss?"></textarea>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-ghost" onclick="closeModal('schedule-modal')">Cancel</button>
+          <button type="submit" class="btn btn-primary" id="schedule-submit-btn">
+            <span class="btn-text"><i class="fas fa-calendar-plus"></i> Schedule</span>
+            <span class="btn-loader" style="display:none"><i class="fas fa-spinner fa-spin"></i> Scheduling…</span>
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-logo">
+      <span class="logo-icon">IB</span>
+      <span class="logo-text">InvestBridge</span>
+    </div>
+    <div class="sidebar-role-badge startup-badge"><i class="fas fa-rocket"></i> Startup</div>
+    <nav class="sidebar-nav">
+      <a href="#" class="nav-item active" data-section="st-overview"><i class="fas fa-th-large"></i> Dashboard</a>
+      <a href="#" class="nav-item" data-section="proposals"><i class="fas fa-file-alt"></i> My Proposals</a>
+      <a href="#" class="nav-item" data-section="interested"><i class="fas fa-users"></i> Interested Investors</a>
+      <a href="#" class="nav-item" data-section="investors"><i class="fas fa-search-dollar"></i> Find Investors</a>
+      <a href="#" class="nav-item" data-section="meetings"><i class="fas fa-calendar-check"></i> Meetings</a>
+      <a href="#" class="nav-item" data-section="notifications"><i class="fas fa-comments"></i> Messages</a>
+      <a href="#" class="nav-item" data-section="profile"><i class="fas fa-user-circle"></i> Profile</a>
+    </nav>
+    <button class="sidebar-logout" id="logout-btn"><i class="fas fa-sign-out-alt"></i> Logout</button>
+  </aside>
+
+  <div class="dash-main">
+    <header class="dash-header">
+      <button class="sidebar-toggle" id="sidebar-toggle"><i class="fas fa-bars"></i></button>
+      <div class="dash-header-title">
+        <h2 id="page-title">Startup Dashboard</h2>
+        <span id="page-subtitle">Manage your startup & funding</span>
+      </div>
+      <div class="dash-header-right">
+        <button id="theme-toggle" class="icon-btn" aria-label="Toggle theme"><i class="fas fa-moon"></i></button>
+        <div class="dash-avatar startup-av" id="user-avatar">ST</div>
+      </div>
+    </header>
+
+    <div class="dash-content">
+
+      <!-- ── OVERVIEW ── -->
+      <div class="dash-section" id="section-st-overview">
+        <div class="welcome-banner startup-banner">
+          <div>
+            <h3>Welcome, <span id="user-name">Founder</span> 🚀</h3>
+            <p>Your startup is live. Keep pushing forward.</p>
+          </div>
+          <i class="fas fa-rocket welcome-icon"></i>
+        </div>
+        <div class="stats-row">
+          <div class="dash-stat-card"><div class="dsc-icon" style="--c:#7c3aed"><i class="fas fa-file-alt"></i></div><div><div class="dsc-num" id="ov-proposals">0</div><div class="dsc-lbl">Proposals</div></div></div>
+          <div class="dash-stat-card"><div class="dsc-icon" style="--c:#3b82f6"><i class="fas fa-users"></i></div><div><div class="dsc-num" id="ov-interested">0</div><div class="dsc-lbl">Interested Investors</div></div></div>
+          <div class="dash-stat-card"><div class="dsc-icon" style="--c:#10b981"><i class="fas fa-check-circle"></i></div><div><div class="dsc-num" id="ov-accepted">0</div><div class="dsc-lbl">Accepted</div></div></div>
+          <div class="dash-stat-card"><div class="dsc-icon" style="--c:#f59e0b"><i class="fas fa-calendar-check"></i></div><div><div class="dsc-num" id="ov-meetings">2</div><div class="dsc-lbl">Meetings Scheduled</div></div></div>
+        </div>
+        <!-- Interested investors preview -->
+        <div class="dash-card">
+          <div class="dash-card-header">
+            <h4><i class="fas fa-users"></i> Investors Interested in Your Proposals</h4>
+            <button class="btn btn-primary" style="padding:0.4rem 1rem;font-size:0.82rem"
+              onclick="if(typeof switchSection==='function') switchSection('interested')">
+              View All
+            </button>
+          </div>
+          <div id="ov-interests-list" class="match-list">
+            <div class="table-empty" style="padding:2rem;text-align:center">
+              <i class="fas fa-spinner fa-spin"></i> Loading…
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── MY PROPOSALS ── -->
+      <div class="dash-section" id="section-proposals" style="display:none">
+        <!-- interests panel (shown when viewing a proposal's investors) -->
+        <div id="interests-panel" style="display:none">
+          <div class="dash-card">
+            <div class="dash-card-header">
+              <h4><i class="fas fa-users"></i> Interested Investors — <span id="interests-proposal-title"></span></h4>
+              <button class="btn btn-ghost" style="padding:0.4rem 0.8rem;font-size:0.82rem" onclick="closeInterestsPanel()">
+                <i class="fas fa-arrow-left"></i> Back to Proposals
+              </button>
+            </div>
+            <div class="table-wrap">
+              <table class="dash-table">
+                <thead><tr><th>#</th><th>Investor</th><th>Firm</th><th>Type</th><th>Email</th><th>Date</th><th>Status</th><th>Action</th></tr></thead>
+                <tbody id="interests-tbody">
+                  <tr><td colspan="8" class="table-empty"><i class="fas fa-spinner fa-spin"></i> Loading…</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <div id="proposals-main">
+          <div class="dash-card">
+            <div class="dash-card-header">
+              <h4><i class="fas fa-file-alt"></i> My Proposals</h4>
+              <button class="btn btn-primary" style="padding:0.4rem 1rem;font-size:0.82rem" id="new-proposal-btn">
+                <i class="fas fa-plus"></i> New Proposal
+              </button>
+            </div>
+            <div class="table-wrap">
+              <table class="dash-table">
+                <thead><tr><th>#</th><th>Title</th><th>Industry</th><th>Funding Goal</th><th>Stage</th><th>Status</th><th>Investors</th><th>Created</th><th></th></tr></thead>
+                <tbody id="proposals-tbody">
+                  <tr><td colspan="9" class="table-empty"><i class="fas fa-spinner fa-spin"></i> Loading…</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── INTERESTED INVESTORS ── -->
+      <div class="dash-section" id="section-interested" style="display:none">
+        <div class="dash-card">
+          <div class="dash-card-header">
+            <h4><i class="fas fa-users"></i> Investors Interested in Your Proposals</h4>
+          </div>
+          <div id="all-interests-list">
+            <div class="table-empty" style="padding:2rem;text-align:center">
+              <i class="fas fa-spinner fa-spin"></i> Loading…
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── FIND INVESTORS ── -->
+      <div class="dash-section" id="section-investors" style="display:none">
+        <div class="dash-card">
+          <div class="dash-card-header">
+            <h4><i class="fas fa-search-dollar"></i> Find Investors</h4>
+            <div style="display:flex;gap:0.5rem;align-items:center">
+              <input type="text" id="inv-search" placeholder="Search by name, firm, focus…" class="dash-search-input" />
+              <select id="inv-type-filter" class="dash-select">
+                <option value="">All Types</option>
+                <option>Angel</option>
+                <option>VC</option>
+                <option>Corporate</option>
+                <option>Family Office</option>
+              </select>
+            </div>
+          </div>
+          <div id="investor-list" class="match-list">
+            <div class="table-empty" style="padding:2rem;text-align:center">
+              <i class="fas fa-spinner fa-spin"></i> Loading investors…
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── MEETINGS ── -->
+      <div class="dash-section" id="section-meetings" style="display:none">
+        <div class="dash-card">
+          <div class="dash-card-header">
+            <h4><i class="fas fa-calendar-check"></i> Scheduled Meetings</h4>
+            <button class="btn btn-primary" style="padding:0.4rem 1rem;font-size:0.82rem"
+              onclick="openScheduleModal()">
+              <i class="fas fa-plus"></i> Schedule Meeting
+            </button>
+          </div>
+          <div class="table-wrap">
+            <table class="dash-table">
+              <thead><tr><th>#</th><th>Title</th><th>Investor</th><th>Date</th><th>Time</th><th>Type</th><th>Proposal</th><th>Status</th><th>Action</th></tr></thead>
+              <tbody id="meetings-tbody">
+                <tr><td colspan="9" class="table-empty"><i class="fas fa-spinner fa-spin"></i> Loading…</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── FUNDING TRACKER ── -->
+      <div class="dash-section" id="section-funding" style="display:none">
+        <div class="dash-card">
+          <div class="dash-card-header"><h4><i class="fas fa-chart-bar"></i> Funding Tracker</h4></div>
+          <div class="funding-progress-wrap">
+            <div class="fp-labels"><span>Raised: <strong>$2.4M</strong></span><span>Goal: <strong>$3.2M</strong></span></div>
+            <div class="fp-bar"><div class="fp-fill" style="width:74%"></div></div>
+            <div class="fp-pct">74% of goal reached</div>
+          </div>
+        </div>
+        <div class="dash-card">
+          <div class="dash-card-header"><h4><i class="fas fa-history"></i> Investment History</h4></div>
+          <div class="table-wrap">
+            <table class="dash-table">
+              <thead><tr><th>#</th><th>Investor</th><th>Amount</th><th>Date</th><th>Stage</th></tr></thead>
+              <tbody>
+                <tr><td>1</td><td>Apex Ventures</td><td class="positive">+$1.2M</td><td>Jan 10, 2026</td><td>Series A</td></tr>
+                <tr><td>2</td><td>TechFund</td><td class="positive">+$800K</td><td>Feb 5, 2026</td><td>Series A</td></tr>
+                <tr><td>3</td><td>GrowthCap</td><td class="positive">+$400K</td><td>Mar 18, 2026</td><td>Series A</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── MESSAGES ── -->
+      <div class="dash-section" id="section-notifications" style="display:none">
+        <div style="display:flex;gap:1.5rem;height:600px">
+          <!-- conversation list -->
+          <div class="dash-card" style="width:280px;flex-shrink:0;display:flex;flex-direction:column;overflow:hidden">
+            <div class="dash-card-header"><h4><i class="fas fa-comments"></i> Conversations</h4></div>
+            <div id="conv-list" style="flex:1;overflow-y:auto"></div>
+          </div>
+          <!-- chat area -->
+          <div class="dash-card" style="flex:1;display:flex;flex-direction:column;overflow:hidden">
+            <div class="dash-card-header" id="chat-header">
+              <h4><i class="fas fa-comment-dots"></i> Select a conversation</h4>
+            </div>
+            <div id="chat-messages" style="flex:1;overflow-y:auto;padding:1rem;display:flex;flex-direction:column;gap:0.75rem">
+              <div style="text-align:center;color:var(--text3);margin-top:4rem">
+                <i class="fas fa-comments" style="font-size:3rem;opacity:0.2;display:block;margin-bottom:1rem"></i>
+                Select a conversation to start messaging
+              </div>
+            </div>
+            <div id="chat-input-area" style="padding:1rem;border-top:1px solid var(--border);display:none">
+              <div style="display:flex;gap:0.75rem">
+                <input type="text" id="chat-input" placeholder="Type a message…"
+                  style="flex:1;background:#1e1e2e;border:1px solid var(--border);color:#e2e8f0;border-radius:8px;padding:0.6rem 0.9rem;font-size:0.88rem;outline:none;font-family:inherit"
+                  onkeydown="if(event.key==='Enter') sendChatMessage()" />
+                <button class="btn btn-primary" onclick="sendChatMessage()" style="padding:0.6rem 1.1rem">
+                  <i class="fas fa-paper-plane"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── PROFILE ── -->
+      <div class="dash-section" id="section-profile" style="display:none">
+        <div class="dash-card">
+          <div class="dash-card-header"><h4><i class="fas fa-user-circle"></i> Startup Profile</h4></div>
+          <div style="padding:2rem;display:flex;flex-direction:column;gap:1.25rem">
+            <div class="settings-row"><strong>Founder Name</strong><p id="profile-name" style="color:var(--text3);font-size:0.85rem;margin-top:0.2rem">—</p></div>
+            <div class="settings-row"><strong>Email</strong><p id="profile-email" style="color:var(--text3);font-size:0.85rem;margin-top:0.2rem">—</p></div>
+            <div class="settings-row"><strong>Role</strong><p style="color:var(--text3);font-size:0.85rem;margin-top:0.2rem">Startup Owner</p></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <script src="dashboard.js?v=11"></script>
+  <script src="startup.js?v=10"></script>
+</body>
+</html>

@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>InvestBridge – Startup Funding Portal</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- Loading Screen -->
+  <div id="loader">
+    <div class="loader-inner">
+      <div class="loader-logo">IB</div>
+      <div class="loader-bar"><div class="loader-fill"></div></div>
+    </div>
+  </div>
+
+  <!-- Particle Background -->
+  <canvas id="particles-canvas"></canvas>
+
+  <!-- Navbar -->
+  <nav id="navbar">
+    <div class="nav-container">
+      <a href="#" class="nav-logo">
+        <span class="logo-icon">IB</span>
+        <span class="logo-text">InvestBridge</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="#features">Features</a></li>
+        <li><a href="#how-it-works">How It Works</a></li>
+        <li><a href="#ai-section">AI Matching</a></li>
+        <li><a href="#stats">Stats</a></li>
+        <li><a href="#testimonials">Reviews</a></li>
+      </ul>
+      <div class="nav-actions">
+        <button id="theme-toggle" aria-label="Toggle theme"><i class="fas fa-moon"></i></button>
+        <a href="login.html" class="btn btn-ghost">Login</a>
+        <a href="signup.html" class="btn btn-primary">Get Started</a>
+      </div>
+      <button class="hamburger" id="hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+    <div class="mobile-menu" id="mobile-menu">
+      <a href="#features">Features</a>
+      <a href="#how-it-works">How It Works</a>
+      <a href="#ai-section">AI Matching</a>
+      <a href="#stats">Stats</a>
+      <a href="#testimonials">Reviews</a>
+      <a href="#" class="btn btn-primary" style="margin-top:1rem;">Get Started</a>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section id="hero">
+    <div class="hero-content" data-aos="fade-up">
+      <div class="hero-badge"><i class="fas fa-bolt"></i> AI-Powered Funding Platform</div>
+      <h1 class="hero-title">
+        Connecting <span class="gradient-text">Startups</span><br/>
+        with Smart <span class="gradient-text">Investors</span>
+      </h1>
+      <p class="hero-sub">AI-powered platform to discover, fund, and grow innovative ideas. Bridge the gap between vision and capital.</p>
+      <div class="hero-cta">
+        <a href="#" class="btn btn-primary btn-lg ripple">Get Started <i class="fas fa-arrow-right"></i></a>
+        <a href="#" class="btn btn-outline btn-lg">Explore Startups <i class="fas fa-compass"></i></a>
+      </div>
+      <div class="hero-trust">
+        <span><i class="fas fa-shield-alt"></i> Secure & Verified</span>
+        <span><i class="fas fa-robot"></i> AI-Powered</span>
+        <span><i class="fas fa-globe"></i> Global Network</span>
+      </div>
+    </div>
+    <div class="hero-visual" data-aos="fade-left" data-aos-delay="200">
+      <div class="hero-card floating">
+        <div class="hcard-header">
+          <div class="hcard-avatar" style="background:linear-gradient(135deg,#7c3aed,#3b82f6)">S</div>
+          <div>
+            <div class="hcard-name">TechVision AI</div>
+            <div class="hcard-tag">SaaS · Series A</div>
+          </div>
+          <div class="hcard-badge">🔥 Hot</div>
+        </div>
+        <div class="hcard-progress-label"><span>Funding Progress</span><span class="hcard-pct">74%</span></div>
+        <div class="hcard-bar"><div class="hcard-fill" style="width:74%"></div></div>
+        <div class="hcard-stats">
+          <div><div class="hs-val">$2.4M</div><div class="hs-lbl">Raised</div></div>
+          <div><div class="hs-val">$3.2M</div><div class="hs-lbl">Goal</div></div>
+          <div><div class="hs-val">48</div><div class="hs-lbl">Investors</div></div>
+        </div>
+      </div>
+      <div class="hero-card-sm floating-slow glass-card" style="top:10%;right:-20px;">
+        <i class="fas fa-robot neon-icon"></i>
+        <span>AI Match Found</span>
+        <strong>94% fit</strong>
+      </div>
+      <div class="hero-card-sm floating-slow glass-card" style="bottom:15%;left:-20px;">
+        <i class="fas fa-bell neon-icon"></i>
+        <span>New Investment</span>
+        <strong>+$50,000</strong>
+      </div>
+      <div class="hero-orb orb1"></div>
+      <div class="hero-orb orb2"></div>
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <section id="features" class="section">
+    <div class="container">
+      <div class="section-header" data-aos="fade-up">
+        <div class="section-badge">Platform Features</div>
+        <h2>Everything You Need to <span class="gradient-text">Succeed</span></h2>
+        <p>A complete ecosystem for startups and investors to connect, collaborate, and grow.</p>
+      </div>
+      <div class="features-grid">
+        <div class="feature-card" data-aos="fade-up" data-aos-delay="0">
+          <div class="feature-icon" style="--clr:#7c3aed"><i class="fas fa-rocket"></i></div>
+          <h3>Startup Profiles</h3>
+          <p>Create rich, detailed startup profiles with pitch decks, financials, and team info to attract the right investors.</p>
+          <div class="feature-glow"></div>
+        </div>
+        <div class="feature-card" data-aos="fade-up" data-aos-delay="100">
+          <div class="feature-icon" style="--clr:#3b82f6"><i class="fas fa-search-dollar"></i></div>
+          <h3>Investor Discovery</h3>
+          <p>Advanced filters to find investors by sector, stage, geography, and investment thesis.</p>
+          <div class="feature-glow"></div>
+        </div>
+        <div class="feature-card" data-aos="fade-up" data-aos-delay="300">
+          <div class="feature-icon" style="--clr:#10b981"><i class="fas fa-lock"></i></div>
+          <h3>Secure Funding</h3>
+          <p>End-to-end encrypted transactions with escrow protection and compliance-ready documentation.</p>
+          <div class="feature-glow"></div>
+        </div>
+        <div class="feature-card" data-aos="fade-up" data-aos-delay="400">
+          <div class="feature-icon" style="--clr:#f59e0b"><i class="fas fa-calendar-check"></i></div>
+          <h3>Meeting Scheduling</h3>
+          <p>Integrated calendar with video call support. Schedule pitch meetings in one click.</p>
+          <div class="feature-glow"></div>
+        </div>
+        <div class="feature-card" data-aos="fade-up" data-aos-delay="500">
+          <div class="feature-icon" style="--clr:#ef4444"><i class="fas fa-bell"></i></div>
+          <h3>Real-Time Alerts</h3>
+          <p>Instant notifications for new matches, messages, funding milestones, and investor activity.</p>
+          <div class="feature-glow"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- How It Works -->
+  <section id="how-it-works" class="section section-alt">
+    <div class="container">
+      <div class="section-header" data-aos="fade-up">
+        <div class="section-badge">Simple Process</div>
+        <h2>How <span class="gradient-text">InvestBridge</span> Works</h2>
+        <p>Three simple steps to start your funding journey.</p>
+      </div>
+      <div class="steps-container">
+        <div class="step" data-aos="fade-up" data-aos-delay="0">
+          <div class="step-number">01</div>
+          <div class="step-icon"><i class="fas fa-user-plus"></i></div>
+          <h3>Register</h3>
+          <p>Sign up as a Startup Founder or Investor. Complete your verified profile in minutes.</p>
+        </div>
+        <div class="step-connector" data-aos="fade-up" data-aos-delay="100">
+          <div class="connector-line"></div>
+          <i class="fas fa-chevron-right connector-arrow"></i>
+        </div>
+        <div class="step" data-aos="fade-up" data-aos-delay="200">
+          <div class="step-number">02</div>
+          <div class="step-icon"><i class="fas fa-upload"></i></div>
+          <h3>Upload / Explore</h3>
+          <p>Startups upload proposals. Investors browse and analyze projects with AI-powered insights.</p>
+        </div>
+        <div class="step-connector" data-aos="fade-up" data-aos-delay="300">
+          <div class="connector-line"></div>
+          <i class="fas fa-chevron-right connector-arrow"></i>
+        </div>
+        <div class="step" data-aos="fade-up" data-aos-delay="400">
+          <div class="step-number">03</div>
+          <div class="step-icon"><i class="fas fa-handshake"></i></div>
+          <h3>Connect & Invest</h3>
+          <p>Schedule meetings, negotiate terms, and close deals securely on the platform.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- For Startups & Investors Split -->
+  <section id="split-section" class="section">
+    <div class="container">
+      <div class="split-grid">
+        <div class="split-card split-startup" data-aos="fade-right">
+          <div class="split-icon"><i class="fas fa-rocket"></i></div>
+          <h3>For Startups</h3>
+          <p>Launch your idea and reach thousands of verified investors.</p>
+          <ul class="split-list">
+            <li><i class="fas fa-check-circle"></i> Upload proposals & pitch decks</li>
+            <li><i class="fas fa-check-circle"></i> Track funding in real-time</li>
+            <li><i class="fas fa-check-circle"></i> Connect with matched investors</li>
+            <li><i class="fas fa-check-circle"></i> Get AI-driven growth insights</li>
+          </ul>
+          <a href="#" class="btn btn-primary ripple">Start as Founder</a>
+        </div>
+        <div class="split-divider" data-aos="fade-up">
+          <div class="split-or">OR</div>
+        </div>
+        <div class="split-card split-investor" data-aos="fade-left">
+          <div class="split-icon"><i class="fas fa-chart-line"></i></div>
+          <h3>For Investors</h3>
+          <p>Discover high-potential startups curated by AI for your portfolio.</p>
+          <ul class="split-list">
+            <li><i class="fas fa-check-circle"></i> Discover vetted startups</li>
+            <li><i class="fas fa-check-circle"></i> Analyze proposals & financials</li>
+            <li><i class="fas fa-check-circle"></i> Invest securely with escrow</li>
+            <li><i class="fas fa-check-circle"></i> Portfolio performance tracking</li>
+          </ul>
+          <a href="#" class="btn btn-outline ripple">Start as Investor</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- AI Feature Highlight -->
+  <section id="ai-section" class="section section-alt">
+    <div class="container">
+      <div class="ai-grid">
+        <div class="ai-content" data-aos="fade-right">
+          <div class="section-badge">Powered by AI</div>
+          <h2>Smart AI <span class="gradient-text">Matching System</span></h2>
+          <p>Our proprietary machine learning engine analyzes hundreds of data points — industry, stage, traction, investor thesis — to surface the most compatible connections.</p>
+          <ul class="ai-features">
+            <li><div class="ai-dot"></div> Semantic analysis of startup proposals</li>
+            <li><div class="ai-dot"></div> Investor preference learning over time</li>
+            <li><div class="ai-dot"></div> Compatibility scoring (0–100%)</li>
+            <li><div class="ai-dot"></div> Predictive funding success rate</li>
+          </ul>
+          <a href="#" class="btn btn-primary ripple">See AI in Action</a>
+        </div>
+        <div class="ai-visual" data-aos="fade-left" data-aos-delay="200">
+          <div class="neural-net" id="neural-net">
+            <svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg" class="neural-svg">
+              <!-- Connections -->
+              <g class="nn-connections" stroke="url(#lineGrad)" stroke-width="1.5" fill="none" opacity="0.5">
+                <line x1="60" y1="60" x2="180" y2="80"/><line x1="60" y1="60" x2="180" y2="150"/>
+                <line x1="60" y1="150" x2="180" y2="80"/><line x1="60" y1="150" x2="180" y2="150"/>
+                <line x1="60" y1="150" x2="180" y2="220"/><line x1="60" y1="240" x2="180" y2="150"/>
+                <line x1="60" y1="240" x2="180" y2="220"/><line x1="180" y1="80" x2="300" y2="60"/>
+                <line x1="180" y1="80" x2="300" y2="150"/><line x1="180" y1="150" x2="300" y2="60"/>
+                <line x1="180" y1="150" x2="300" y2="150"/><line x1="180" y1="150" x2="300" y2="240"/>
+                <line x1="180" y1="220" x2="300" y2="150"/><line x1="180" y1="220" x2="300" y2="240"/>
+                <line x1="300" y1="60" x2="370" y2="150"/><line x1="300" y1="150" x2="370" y2="150"/>
+                <line x1="300" y1="240" x2="370" y2="150"/>
+              </g>
+              <defs>
+                <linearGradient id="lineGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                  <stop offset="0%" style="stop-color:#7c3aed"/>
+                  <stop offset="100%" style="stop-color:#06b6d4"/>
+                </linearGradient>
+                <radialGradient id="nodeGrad"><stop offset="0%" style="stop-color:#a78bfa"/><stop offset="100%" style="stop-color:#7c3aed"/></radialGradient>
+              </defs>
+              <!-- Nodes Layer 1 -->
+              <circle cx="60" cy="60" r="14" fill="url(#nodeGrad)" class="nn-node"/>
+              <circle cx="60" cy="150" r="14" fill="url(#nodeGrad)" class="nn-node"/>
+              <circle cx="60" cy="240" r="14" fill="url(#nodeGrad)" class="nn-node"/>
+              <!-- Nodes Layer 2 -->
+              <circle cx="180" cy="80" r="14" fill="url(#nodeGrad)" class="nn-node"/>
+              <circle cx="180" cy="150" r="18" fill="url(#nodeGrad)" class="nn-node nn-active"/>
+              <circle cx="180" cy="220" r="14" fill="url(#nodeGrad)" class="nn-node"/>
+              <!-- Nodes Layer 3 -->
+              <circle cx="300" cy="60" r="14" fill="url(#nodeGrad)" class="nn-node"/>
+              <circle cx="300" cy="150" r="14" fill="url(#nodeGrad)" class="nn-node"/>
+              <circle cx="300" cy="240" r="14" fill="url(#nodeGrad)" class="nn-node"/>
+              <!-- Output -->
+              <circle cx="370" cy="150" r="20" fill="url(#lineGrad)" class="nn-node nn-output"/>
+              <text x="370" y="155" text-anchor="middle" fill="white" font-size="10" font-weight="bold">94%</text>
+              <!-- Labels -->
+              <text x="60" y="290" text-anchor="middle" fill="#a78bfa" font-size="10">Input</text>
+              <text x="180" y="290" text-anchor="middle" fill="#a78bfa" font-size="10">Hidden</text>
+              <text x="300" y="290" text-anchor="middle" fill="#a78bfa" font-size="10">Process</text>
+              <text x="370" y="290" text-anchor="middle" fill="#06b6d4" font-size="10">Match</text>
+            </svg>
+          </div>
+          <div class="ai-match-card glass-card">
+            <div class="amc-row"><span>TechVision AI</span><span class="match-score">94% Match</span></div>
+            <div class="amc-row"><span>GreenEnergy Co</span><span class="match-score">87% Match</span></div>
+            <div class="amc-row"><span>HealthTrack Pro</span><span class="match-score">81% Match</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats Section -->
+  <section id="stats" class="section stats-section">
+    <div class="container">
+      <div class="stats-grid">
+        <div class="stat-item" data-aos="fade-up" data-aos-delay="0">
+          <div class="stat-icon"><i class="fas fa-rocket"></i></div>
+          <div class="stat-number" data-target="2400">0</div>
+          <div class="stat-suffix">+</div>
+          <div class="stat-label">Startups Listed</div>
+        </div>
+        <div class="stat-item" data-aos="fade-up" data-aos-delay="100">
+          <div class="stat-icon"><i class="fas fa-users"></i></div>
+          <div class="stat-number" data-target="850">0</div>
+          <div class="stat-suffix">+</div>
+          <div class="stat-label">Investors Onboard</div>
+        </div>
+        <div class="stat-item" data-aos="fade-up" data-aos-delay="200">
+          <div class="stat-icon"><i class="fas fa-dollar-sign"></i></div>
+          <div class="stat-prefix">$</div>
+          <div class="stat-number" data-target="120">0</div>
+          <div class="stat-suffix">M+</div>
+          <div class="stat-label">Funds Raised</div>
+        </div>
+        <div class="stat-item" data-aos="fade-up" data-aos-delay="300">
+          <div class="stat-icon"><i class="fas fa-handshake"></i></div>
+          <div class="stat-number" data-target="340">0</div>
+          <div class="stat-suffix">+</div>
+          <div class="stat-label">Successful Deals</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials -->
+  <section id="testimonials" class="section section-alt">
+    <div class="container">
+      <div class="section-header" data-aos="fade-up">
+        <div class="section-badge">Testimonials</div>
+        <h2>Trusted by <span class="gradient-text">Founders & Investors</span></h2>
+      </div>
+      <div class="testimonials-grid">
+        <div class="testimonial-card" data-aos="fade-up" data-aos-delay="0">
+          <div class="t-stars">★★★★★</div>
+          <p>"InvestBridge connected us with our lead investor within 2 weeks. The AI matching is incredibly accurate — it felt like the platform truly understood our vision."</p>
+          <div class="t-author">
+            <div class="t-avatar" style="background:linear-gradient(135deg,#7c3aed,#3b82f6)">AK</div>
+            <div><strong>Alex Kim</strong><span>CEO, TechVision AI</span></div>
+          </div>
+        </div>
+        <div class="testimonial-card" data-aos="fade-up" data-aos-delay="150">
+          <div class="t-stars">★★★★★</div>
+          <p>"As an investor, I've tried many platforms. InvestBridge's AI curation saves me hours of research. The deal flow quality is exceptional and the process is seamless."</p>
+          <div class="t-author">
+            <div class="t-avatar" style="background:linear-gradient(135deg,#06b6d4,#10b981)">SR</div>
+            <div><strong>Sarah Rodriguez</strong><span>Partner, Apex Ventures</span></div>
+          </div>
+        </div>
+        <div class="testimonial-card" data-aos="fade-up" data-aos-delay="300">
+          <div class="t-stars">★★★★★</div>
+          <p>"We raised our seed round in 6 weeks using InvestBridge. The scheduling tools and secure document sharing made the entire process professional and stress-free."</p>
+          <div class="t-author">
+            <div class="t-avatar" style="background:linear-gradient(135deg,#f59e0b,#ef4444)">MP</div>
+            <div><strong>Marcus Patel</strong><span>Founder, GreenEnergy Co</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section id="cta" class="section cta-section">
+    <div class="cta-bg-orb cta-orb1"></div>
+    <div class="cta-bg-orb cta-orb2"></div>
+    <div class="container">
+      <div class="cta-content" data-aos="fade-up">
+        <h2>Start Your Funding Journey <span class="gradient-text">Today</span></h2>
+        <p>Join thousands of startups and investors already building the future on InvestBridge.</p>
+        <div class="cta-buttons">
+          <a href="signup.html" class="btn btn-primary btn-lg ripple">Register Now <i class="fas fa-arrow-right"></i></a>
+          <a href="login.html" class="btn btn-ghost btn-lg">Login <i class="fas fa-sign-in-alt"></i></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer id="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="#" class="nav-logo">
+            <span class="logo-icon">IB</span>
+            <span class="logo-text">InvestBridge</span>
+          </a>
+          <p>Connecting visionary startups with smart capital. Building the future, one deal at a time.</p>
+          <div class="social-links">
+            <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+            <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+            <a href="#" aria-label="GitHub"><i class="fab fa-github"></i></a>
+            <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+          </div>
+        </div>
+        <div class="footer-links">
+          <h4>Platform</h4>
+          <a href="#">For Startups</a>
+          <a href="#">For Investors</a>
+          <a href="#">AI Matching</a>
+          <a href="#">Pricing</a>
+        </div>
+        <div class="footer-links">
+          <h4>Company</h4>
+          <a href="#">About Us</a>
+          <a href="#">Blog</a>
+          <a href="#">Careers</a>
+          <a href="#">Contact</a>
+        </div>
+        <div class="footer-links">
+          <h4>Legal</h4>
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms of Service</a>
+          <a href="#">Cookie Policy</a>
+          <a href="#">Security</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2026 InvestBridge. All rights reserved.</p>
+        <p>Built with <i class="fas fa-heart" style="color:#ef4444"></i> for the startup ecosystem</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" />
+  <script src="script.js"></script>
+</body>
+</html>

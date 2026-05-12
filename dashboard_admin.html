@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Dashboard – InvestBridge</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="dashboard.css" />
+</head>
+<body class="dash-body">
+
+  <!-- Sidebar -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-logo">
+      <span class="logo-icon">IB</span>
+      <span class="logo-text">InvestBridge</span>
+    </div>
+    <div class="sidebar-role-badge admin-badge"><i class="fas fa-shield-alt"></i> Admin</div>
+    <nav class="sidebar-nav">
+      <a href="#" class="nav-item active" data-section="overview">
+        <i class="fas fa-th-large"></i> Overview
+      </a>
+      <a href="#" class="nav-item" data-section="users">
+        <i class="fas fa-users"></i> Manage Users
+      </a>
+      <a href="#" class="nav-item" data-section="startups">
+        <i class="fas fa-rocket"></i> Startups
+      </a>
+      <a href="#" class="nav-item" data-section="investors">
+        <i class="fas fa-chart-line"></i> Investors
+      </a>
+    </nav>
+    <button class="sidebar-logout" id="logout-btn"><i class="fas fa-sign-out-alt"></i> Logout</button>
+  </aside>
+
+  <!-- Main -->
+  <div class="dash-main">
+    <header class="dash-header">
+      <button class="sidebar-toggle" id="sidebar-toggle"><i class="fas fa-bars"></i></button>
+      <div class="dash-header-title">
+        <h2 id="page-title">Admin Dashboard</h2>
+        <span id="page-subtitle">Platform overview & management</span>
+      </div>
+      <div class="dash-header-right">
+        <button id="theme-toggle" class="icon-btn" aria-label="Toggle theme"><i class="fas fa-moon"></i></button>
+        <div class="dash-avatar admin-av" id="user-avatar">AD</div>
+      </div>
+    </header>
+
+    <div class="dash-content">
+
+      <!-- ── OVERVIEW ── -->
+      <div class="dash-section" id="section-overview">
+        <div class="welcome-banner admin-banner">
+          <div>
+            <h3>Welcome back, <span id="user-name">Admin</span> 👋</h3>
+            <p>Here's what's happening on the platform today.</p>
+          </div>
+          <i class="fas fa-shield-alt welcome-icon"></i>
+        </div>
+        <div class="stats-row">
+          <div class="dash-stat-card"><div class="dsc-icon" style="--c:#7c3aed"><i class="fas fa-users"></i></div><div><div class="dsc-num" id="stat-users">0</div><div class="dsc-lbl">Total Users</div></div></div>
+          <div class="dash-stat-card"><div class="dsc-icon" style="--c:#3b82f6"><i class="fas fa-rocket"></i></div><div><div class="dsc-num" id="stat-startups">0</div><div class="dsc-lbl">Startups</div></div></div>
+          <div class="dash-stat-card"><div class="dsc-icon" style="--c:#06b6d4"><i class="fas fa-chart-line"></i></div><div><div class="dsc-num" id="stat-investors">0</div><div class="dsc-lbl">Investors</div></div></div>
+        </div>
+        <div class="dash-card">
+          <div class="dash-card-header">
+            <h4><i class="fas fa-users"></i> Recent Users</h4>
+          </div>
+          <div class="table-wrap">
+            <table class="dash-table">
+              <thead><tr><th>#</th><th>Name</th><th>Email</th><th>Role</th><th>Joined</th><th>Status</th></tr></thead>
+              <tbody id="users-tbody">
+                <tr><td colspan="6" class="table-empty"><i class="fas fa-spinner fa-spin"></i> Loading...</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── MANAGE USERS ── -->
+      <div class="dash-section" id="section-users" style="display:none">
+        <div class="dash-card">
+          <div class="dash-card-header">
+            <h4><i class="fas fa-users"></i> All Users</h4>
+            <div style="display:flex;gap:0.5rem;align-items:center">
+              <input id="user-search" type="text" placeholder="Search by name or email…" class="dash-search-input" />
+              <select id="user-role-filter" class="dash-select">
+                <option value="">All Roles</option>
+                <option value="admin">Admin</option>
+                <option value="startup">Startup</option>
+                <option value="investor">Investor</option>
+              </select>
+            </div>
+          </div>
+          <div class="table-wrap">
+            <table class="dash-table">
+              <thead><tr><th>#</th><th>Name</th><th>Email</th><th>Role</th><th>Joined</th><th>Status</th></tr></thead>
+              <tbody id="all-users-tbody">
+                <tr><td colspan="6" class="table-empty"><i class="fas fa-spinner fa-spin"></i> Loading...</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── STARTUPS ── -->
+      <div class="dash-section" id="section-startups" style="display:none">
+        <div class="dash-card">
+          <div class="dash-card-header">
+            <h4><i class="fas fa-rocket"></i> Registered Startups</h4>
+          </div>
+          <div class="table-wrap">
+            <table class="dash-table">
+              <thead><tr><th>#</th><th>Name</th><th>Email</th><th>Company</th><th>Industry</th><th>Stage</th><th>Joined</th></tr></thead>
+              <tbody id="startups-tbody">
+                <tr><td colspan="7" class="table-empty"><i class="fas fa-spinner fa-spin"></i> Loading...</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── INVESTORS ── -->
+      <div class="dash-section" id="section-investors" style="display:none">
+        <div class="dash-card">
+          <div class="dash-card-header">
+            <h4><i class="fas fa-chart-line"></i> Registered Investors</h4>
+          </div>
+          <div class="table-wrap">
+            <table class="dash-table">
+              <thead><tr><th>#</th><th>Name</th><th>Email</th><th>Firm</th><th>Type</th><th>Focus</th><th>Joined</th></tr></thead>
+              <tbody id="investors-tbody">
+                <tr><td colspan="7" class="table-empty"><i class="fas fa-spinner fa-spin"></i> Loading...</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- end dash-content -->
+  </div><!-- end dash-main -->
+
+  <script src="dashboard.js?v=10"></script>
+</body>
+</html>

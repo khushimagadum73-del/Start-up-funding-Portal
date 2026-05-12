@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sign Up – InvestBridge</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="auth.css" />
+</head>
+<body class="auth-body">
+  <canvas id="particles-canvas"></canvas>
+
+  <nav id="navbar" class="scrolled">
+    <div class="nav-container">
+      <a href="index.html" class="nav-logo">
+        <span class="logo-icon">IB</span>
+        <span class="logo-text">InvestBridge</span>
+      </a>
+      <div class="nav-actions">
+        <button id="theme-toggle" aria-label="Toggle theme"><i class="fas fa-moon"></i></button>
+        <a href="login.html" class="btn btn-ghost">Login</a>
+        <a href="signup.html" class="btn btn-primary">Sign Up</a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="auth-main">
+    <!-- Left Panel -->
+    <div class="auth-panel auth-left">
+      <div class="auth-left-content">
+        <div class="auth-brand-badge"><i class="fas fa-rocket"></i> Join the Ecosystem</div>
+        <h2>Start your <span class="gradient-text">funding journey</span> today</h2>
+        <p>Create your free account and get matched with the right investors or startups using our AI engine.</p>
+
+        <!-- Dynamic left panel content per role -->
+        <div id="left-startup">
+          <div class="auth-perks">
+            <div class="perk-item"><i class="fas fa-check-circle"></i><span>Upload pitch decks & proposals</span></div>
+            <div class="perk-item"><i class="fas fa-check-circle"></i><span>AI-matched with relevant investors</span></div>
+            <div class="perk-item"><i class="fas fa-check-circle"></i><span>Real-time funding tracker</span></div>
+            <div class="perk-item"><i class="fas fa-check-circle"></i><span>Schedule investor meetings</span></div>
+          </div>
+        </div>
+        <div id="left-investor" style="display:none">
+          <div class="auth-perks">
+            <div class="perk-item"><i class="fas fa-check-circle"></i><span>Discover vetted startups daily</span></div>
+            <div class="perk-item"><i class="fas fa-check-circle"></i><span>AI-curated deal flow</span></div>
+            <div class="perk-item"><i class="fas fa-check-circle"></i><span>Secure escrow-backed investing</span></div>
+            <div class="perk-item"><i class="fas fa-check-circle"></i><span>Portfolio performance dashboard</span></div>
+          </div>
+        </div>
+
+        <div class="auth-avatars">
+          <div class="avatar-stack">
+            <div class="av" style="background:linear-gradient(135deg,#7c3aed,#3b82f6)">AK</div>
+            <div class="av" style="background:linear-gradient(135deg,#06b6d4,#10b981)">SR</div>
+            <div class="av" style="background:linear-gradient(135deg,#f59e0b,#ef4444)">MP</div>
+            <div class="av" style="background:linear-gradient(135deg,#3b82f6,#06b6d4)">JL</div>
+          </div>
+          <span>Join <strong>3,250+</strong> members already on the platform</span>
+        </div>
+      </div>
+      <div class="auth-orb auth-orb1"></div>
+      <div class="auth-orb auth-orb2"></div>
+    </div>
+
+    <!-- Right Panel -->
+    <div class="auth-panel auth-right">
+      <div class="auth-form-wrap">
+        <div class="auth-form-header">
+          <h1>Create Account</h1>
+          <p>Already have an account? <a href="login.html">Sign in</a></p>
+        </div>
+
+        <!-- Role Selector (no admin for self-registration) -->
+        <div class="role-selector" id="signup-role-selector">
+          <button type="button" class="role-pill active" data-role="startup">
+            <i class="fas fa-rocket"></i> Startup Owner
+          </button>
+          <button type="button" class="role-pill" data-role="investor">
+            <i class="fas fa-chart-line"></i> Investor
+          </button>
+        </div>
+
+        <div id="su-role-banner" class="role-banner role-startup">
+          Registering as <strong id="su-role-label">Startup Owner</strong>
+        </div>
+
+        <div id="su-api-error" class="api-error" style="display:none"></div>
+
+        <form id="signup-form" novalidate>
+          <input type="hidden" id="signup-role" name="role" value="startup" />
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="first-name">First Name</label>
+              <div class="input-wrap">
+                <i class="fas fa-user input-icon"></i>
+                <input type="text" id="first-name" name="first_name" placeholder="John" required />
+              </div>
+              <span class="field-error" id="first-name-error"></span>
+            </div>
+            <div class="form-group">
+              <label for="last-name">Last Name</label>
+              <div class="input-wrap">
+                <i class="fas fa-user input-icon"></i>
+                <input type="text" id="last-name" name="last_name" placeholder="Doe" required />
+              </div>
+              <span class="field-error" id="last-name-error"></span>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="su-email">Email Address</label>
+            <div class="input-wrap">
+              <i class="fas fa-envelope input-icon"></i>
+              <input type="email" id="su-email" name="email" placeholder="you@example.com" autocomplete="email" required />
+            </div>
+            <span class="field-error" id="su-email-error"></span>
+          </div>
+
+          <div class="form-group">
+            <label for="phone">Phone Number</label>
+            <div class="input-wrap">
+              <i class="fas fa-phone input-icon"></i>
+              <input type="tel" id="phone" name="phone" placeholder="+1 234 567 8900" />
+            </div>
+          </div>
+
+          <!-- Startup-specific fields -->
+          <div id="startup-fields">
+            <div class="form-group">
+              <label for="company">Startup / Company Name <span class="req">*</span></label>
+              <div class="input-wrap">
+                <i class="fas fa-building input-icon"></i>
+                <input type="text" id="company" name="company_name" placeholder="Your startup name" />
+              </div>
+              <span class="field-error" id="company-error"></span>
+            </div>
+            <div class="form-group">
+              <label for="industry">Industry / Sector</label>
+              <div class="input-wrap select-wrap">
+                <i class="fas fa-industry input-icon"></i>
+                <select id="industry" name="industry">
+                  <option value="">Select industry</option>
+                  <option>FinTech</option><option>HealthTech</option><option>EdTech</option>
+                  <option>SaaS</option><option>AI / ML</option><option>CleanTech</option>
+                  <option>E-Commerce</option><option>Other</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="funding-stage">Funding Stage</label>
+              <div class="input-wrap select-wrap">
+                <i class="fas fa-layer-group input-icon"></i>
+                <select id="funding-stage" name="funding_stage">
+                  <option value="">Select stage</option>
+                  <option>Pre-Seed</option><option>Seed</option>
+                  <option>Series A</option><option>Series B</option><option>Series C+</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <!-- Investor-specific fields -->
+          <div id="investor-fields" style="display:none">
+            <div class="form-group">
+              <label for="firm">Investment Firm</label>
+              <div class="input-wrap">
+                <i class="fas fa-briefcase input-icon"></i>
+                <input type="text" id="firm" name="firm_name" placeholder="e.g. Apex Ventures (optional)" />
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="inv-type">Investor Type</label>
+              <div class="input-wrap select-wrap">
+                <i class="fas fa-user-tie input-icon"></i>
+                <select id="inv-type" name="investor_type">
+                  <option value="">Select type</option>
+                  <option>Angel Investor</option><option>Venture Capital</option>
+                  <option>Private Equity</option><option>Corporate VC</option><option>Family Office</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="inv-focus">Investment Focus</label>
+              <div class="input-wrap select-wrap">
+                <i class="fas fa-crosshairs input-icon"></i>
+                <select id="inv-focus" name="investment_focus">
+                  <option value="">Select focus</option>
+                  <option>Early Stage</option><option>Growth Stage</option><option>Late Stage</option><option>All Stages</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="su-password">Password</label>
+            <div class="input-wrap">
+              <i class="fas fa-lock input-icon"></i>
+              <input type="password" id="su-password" name="password" placeholder="Min. 8 characters" autocomplete="new-password" required />
+              <button type="button" class="toggle-pw" aria-label="Toggle password">
+                <i class="fas fa-eye"></i>
+              </button>
+            </div>
+            <div class="password-strength">
+              <div class="strength-bar"><div class="strength-fill" id="strength-fill"></div></div>
+              <span id="strength-label">Enter a password</span>
+            </div>
+            <span class="field-error" id="su-password-error"></span>
+          </div>
+
+          <div class="form-group">
+            <label for="confirm-password">Confirm Password</label>
+            <div class="input-wrap">
+              <i class="fas fa-lock input-icon"></i>
+              <input type="password" id="confirm-password" name="confirm_password" placeholder="Repeat your password" autocomplete="new-password" required />
+              <button type="button" class="toggle-pw" aria-label="Toggle password">
+                <i class="fas fa-eye"></i>
+              </button>
+            </div>
+            <span class="field-error" id="confirm-password-error"></span>
+          </div>
+
+          <div class="form-check">
+            <label class="checkbox-label">
+              <input type="checkbox" id="terms" required />
+              <span class="checkmark"></span>
+              I agree to the <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>
+            </label>
+            <span class="field-error" id="terms-error"></span>
+          </div>
+
+          <button type="submit" class="btn btn-primary btn-full ripple" id="signup-btn">
+            <span class="btn-text">Create Account <i class="fas fa-arrow-right"></i></span>
+            <span class="btn-loader" style="display:none"><i class="fas fa-spinner fa-spin"></i> Creating account...</span>
+          </button>
+        </form>
+      </div>
+    </div>
+  </main>
+
+  <script src="auth.js"></script>
+</body>
+</html>
